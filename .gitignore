@@ -45,7 +45,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-Augment/UserSettings/EditorUserSettings.asset
+ChasingHope/UserSettings/EditorUserSettings.asset
 
 # Unity3D generated meta files
 *.pidb.meta
