@@ -20,8 +20,6 @@ public class DialogueLoader : MonoBehaviour
         scrollTimer = 0;
         scrollSpeed = 1 / scrollSpeed;
         dialogueStarted = false;
-
-        StartDialogue();
     }
 
     public void LoadText(List<string> dialogue) {
