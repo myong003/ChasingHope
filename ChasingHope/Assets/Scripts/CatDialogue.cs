@@ -20,7 +20,7 @@ public class CatDialogue : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other){
         if (other.gameObject.name == "Alice"){
-            if (Input.GetKeyUp(KeyCode.X)){
+            if (Input.GetKey(KeyCode.X)){
                 dLoad.StartDialogue();
             }
         }
