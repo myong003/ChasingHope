@@ -7,36 +7,38 @@ public class DialogueLoader : MonoBehaviour
 {
     public List<string> dialogues;
     public TextMeshProUGUI screenText;
+    public TextMeshProUGUI autoText;
     public GameObject dialoguePopup;
+    public GameObject continueTriangle;
 
-    public float scrollSpeed;
+    public float scrollSpeed;   // How fast the text moves
+    public bool isAuto;
+    public float autoDelay;     // How long before the text automatically continues in auto
+
     private float scrollTimer;
     private bool moveToNextDialogue;
-    private bool dialogueStarted;
     private int dialogueIndex;
     private int characterIndex;
+    private float autoTimer;
 
     void Start() {
         scrollTimer = 0;
+        autoTimer = 0;
         scrollSpeed = 1 / scrollSpeed;
-        dialogueStarted = false;
-    }
-
-    public void LoadText(List<string> dialogue) {
-        this.dialogues = dialogue;
-    }
-
-    public void StartDialogue() {
-        dialoguePopup.SetActive(true);
-        dialogueStarted = true;
-        dialogueIndex = 0;
-        characterIndex = 0;
-        screenText.text = "";
-        scrollTimer = 0;
     }
 
     void Update() {
-        if (dialogueStarted && dialogueIndex < dialogues.Count) {
+
+        if (dialoguePopup.activeInHierarchy && dialogueIndex < dialogues.Count) {
+
+            if (Input.GetKeyDown(KeyCode.A)) {
+                ToggleAuto();
+            }
+
+            if (Input.GetKeyDown(KeyCode.S)) {
+                EndDialogue();
+            }
+
             // Get the current dialogue in the list of dialogues
             string currentDialogue = dialogues[dialogueIndex];
 
@@ -62,16 +64,57 @@ public class DialogueLoader : MonoBehaviour
                 }
             } 
             else {
+               continueTriangle.SetActive(true);
+
                 // Wait for user to press x to continue to next dialogue
-                if (Input.GetKeyDown(KeyCode.X)) {
+                if (Input.GetKeyDown(KeyCode.X) || (isAuto && autoTimer > autoDelay)) {
                     characterIndex = 0;
                     dialogueIndex++;
                     screenText.text = "";
+                    autoTimer = 0;
+                    continueTriangle.SetActive(false);
+
+                    if (dialogueIndex >= dialogues.Count) {
+                        EndDialogue();
+                    }
+                }
+                else if (isAuto) {
+                    autoTimer += Time.deltaTime;
                 }
             }
         }
-        else {
-            dialoguePopup.SetActive(false);
+    }
+
+    public void StartDialogue() {
+        if (!dialoguePopup.activeInHierarchy) {
+            dialoguePopup.SetActive(true);
+            dialogueIndex = 0;
+            characterIndex = 0;
+            screenText.text = "";
+            scrollTimer = 0;
+            PlayerController.Instance.FreezePlayer();
         }
     }
+
+    public void EndDialogue() {
+        dialoguePopup.SetActive(false);
+        PlayerController.Instance.UnfreezePlayer();
+    }
+
+    public void LoadText(List<string> dialogue) {
+        this.dialogues = dialogue;
+    }
+
+    public void ToggleAuto() {
+        isAuto = !isAuto;
+        autoTimer = 0;
+
+        if (isAuto) {
+            autoText.color = Color.yellow;
+        }
+        else {
+            autoText.color = Color.white;
+        }
+    }
+
 }
