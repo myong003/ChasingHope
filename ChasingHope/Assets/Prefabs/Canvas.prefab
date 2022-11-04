@@ -465,7 +465,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 65b0c0531308d3f419013d5ff997e9ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -769,8 +769,8 @@ MonoBehaviour:
   autoText: {fileID: 1145198767}
   dialoguePopup: {fileID: 2714110887039225954}
   continueTriangle: {fileID: 1660158225}
-  scrollSpeed: 25
-  isAuto: 1
+  scrollSpeed: 75
+  isAuto: 0
   autoDelay: 1.5
 --- !u!1 &2714110886189370851
 GameObject:
