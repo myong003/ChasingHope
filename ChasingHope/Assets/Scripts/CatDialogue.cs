@@ -19,7 +19,7 @@ public class CatDialogue : MonoBehaviour
     }
 
     void OnTriggerStay2D(Collider2D other){
-        if (other.gameObject.name == "Alice"){
+        if (other.gameObject.name == "interactTrigger"){
             if (Input.GetKey(KeyCode.X)){
                 dLoad.StartDialogue();
             }
