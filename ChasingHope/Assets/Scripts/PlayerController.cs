@@ -44,28 +44,29 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        Vector3 alicePos = gameObject.transform.position;
         if (verticalInput >= 0.2f)
         {
             facingDirection = "up";
-            interactTrigger.transform.position = new Vector3(0, 0.5f, 0);
+            interactTrigger.transform.position = alicePos + new Vector3(0, 0.5f, 0);
         }
 
         else if (verticalInput <= -0.2f)
         {
             facingDirection = "down";
-            interactTrigger.transform.position = new Vector3(0, -0.5f, 0);
+            interactTrigger.transform.position = alicePos + new Vector3(0, -0.5f, 0);
         }
 
         else if (horizontalInput <= -0.2f)
         {
             facingDirection = "left";
-            interactTrigger.transform.position = new Vector3(-0.5f, 0, 0);
+            interactTrigger.transform.position = alicePos + new Vector3(-0.5f, 0, 0);
         }
 
         else if (horizontalInput >= 0.2f)
         {
             facingDirection = "right";
-            interactTrigger.transform.position = new Vector3(0.5f, 0, 0);
+            interactTrigger.transform.position = alicePos + new Vector3(0.5f, 0, 0);
         }
     }
  
