@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;     // how fast the player moves between squares
     public Transform movePoint;
+    public GameObject interactTrigger;
+    public string facingDirection;
 
     public LayerMask collision;
 
@@ -13,17 +15,20 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         movePoint.parent = null;
+        facingDirection = "up";
     }
 
     // Update is called once per frame
     void Update()
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+        int horizontalInput = 0;
+        int verticalInput = 0;
 
         if (Vector3.Distance(movePoint.position, this.transform.position) <= 0.05f)
         {
-            int horizontalInput = (int)Input.GetAxisRaw("Horizontal");
-            int verticalInput = (int)Input.GetAxisRaw("Vertical");
+            horizontalInput = (int)Input.GetAxisRaw("Horizontal");
+            verticalInput = (int)Input.GetAxisRaw("Vertical");
             
             Vector3 deltaX = new Vector3(horizontalInput, 0, 0);
             Vector3 deltaY = new Vector3(0, verticalInput, 0);
@@ -38,5 +43,30 @@ public class PlayerController : MonoBehaviour
                 movePoint.position += deltaY;
             }
         }
+
+        if (verticalInput >= 0.2f)
+        {
+            facingDirection = "up";
+            interactTrigger.transform.position = new Vector3(0, 0.5f, 0);
+        }
+
+        else if (verticalInput <= -0.2f)
+        {
+            facingDirection = "down";
+            interactTrigger.transform.position = new Vector3(0, -0.5f, 0);
+        }
+
+        else if (horizontalInput <= -0.2f)
+        {
+            facingDirection = "left";
+            interactTrigger.transform.position = new Vector3(-0.5f, 0, 0);
+        }
+
+        else if (horizontalInput >= 0.2f)
+        {
+            facingDirection = "right";
+            interactTrigger.transform.position = new Vector3(0.5f, 0, 0);
+        }
     }
+ 
 }
