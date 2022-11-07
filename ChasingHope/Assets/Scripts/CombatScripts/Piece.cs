@@ -16,11 +16,11 @@ public class Piece : MonoBehaviour
         
     }
 
-    void OnMouseDown() {
-        InputManager.Instance.ClickPiece(this);
-    }
+    // void OnMouseDown() {
+    //     InputManager.Instance.ClickPiece(this);
+    // }
 
-    void OnMouseUp() {
-        InputManager.Instance.ReleasePiece();
-    }
+    // void OnMouseUp() {
+    //     InputManager.Instance.ReleasePiece();
+    // }
 }
