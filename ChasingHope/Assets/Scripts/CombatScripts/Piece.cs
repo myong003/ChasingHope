@@ -4,23 +4,15 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Vector2Int coord;
+
+    protected virtual void Start() {
+        UpdateCoords();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void UpdateCoords() {
+        int newX = Mathf.RoundToInt(this.gameObject.transform.position.x);
+        int newY = Mathf.RoundToInt(this.gameObject.transform.position.y);
+        coord = new Vector2Int(newX, newY);
     }
-
-    // void OnMouseDown() {
-    //     InputManager.Instance.ClickPiece(this);
-    // }
-
-    // void OnMouseUp() {
-    //     InputManager.Instance.ReleasePiece();
-    // }
 }
