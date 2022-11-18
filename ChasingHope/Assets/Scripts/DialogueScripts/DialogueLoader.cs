@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text;
 
 public class DialogueLoader : MonoBehaviour
 {
@@ -9,8 +10,11 @@ public class DialogueLoader : MonoBehaviour
     public Dialogue dialogue;
     public TextMeshProUGUI screenText;
     public TextMeshProUGUI autoText;
+    public TextMeshProUGUI speakerText;
     public GameObject dialoguePopup;
     public GameObject continueTriangle;
+    public SpriteRenderer leftSprite;
+    public SpriteRenderer rightSprite;
 
     public float scrollSpeed;   // How fast the text moves
     public bool isAuto;
@@ -83,6 +87,8 @@ public class DialogueLoader : MonoBehaviour
                     screenText.text = "";
                     autoTimer = 0;
                     continueTriangle.SetActive(false);
+                    ParseSpeaker(dialogue.sentences[dialogueIndex]);
+                    ParseExpression(dialogue.sentences[dialogueIndex]);
 
                     if (dialogueIndex >= dialogue.sentences.Length) {
                         EndDialogue();
@@ -107,6 +113,9 @@ public class DialogueLoader : MonoBehaviour
             screenText.text = "";
             scrollTimer = 0;
             PlayerController.Instance.FreezePlayer();
+
+            ParseSpeaker(dialogue.sentences[0]);
+            ParseExpression(dialogue.sentences[0]);
         }
     }
 
@@ -133,6 +142,52 @@ public class DialogueLoader : MonoBehaviour
         else {
             autoText.color = Color.white;
         }
+    }
+
+    private void ParseSpeaker(string currentDialogue) {
+        if (currentDialogue.Contains(':')) {
+            StringBuilder sb = new StringBuilder();
+            while (characterIndex < currentDialogue.Length && currentDialogue[characterIndex] != ':') {
+                sb.Append(currentDialogue[characterIndex]);
+                characterIndex++;
+            }
+            characterIndex += 2;    // Increment past the : and the space after
+            speakerText.text = sb.ToString();
+        }
+    }
+
+    private void ParseExpression(string currentDialogue) {
+        if (currentDialogue.Contains('[')) {
+            StringBuilder sb = new StringBuilder();
+            if (currentDialogue[characterIndex] != '[') {
+                characterIndex = currentDialogue.IndexOf('[');
+            }
+            characterIndex++;   // Increment 1 past initial "["
+            
+            // Get string inbetween [] to find expression
+            while (currentDialogue[characterIndex] != ']') {
+                if (currentDialogue[characterIndex] == ' ') {
+                    // String doesn't contain an expression, don't need to do anything
+                    return;
+                }
+                sb.Append(currentDialogue[characterIndex]);
+                characterIndex++;
+            }
+            characterIndex += 2;    // Increment past the : and the space after
+            Sprite tempSprite = GetCharacterSprite(speakerText.text, sb.ToString());
+            if (tempSprite != null) {
+                leftSprite.sprite = tempSprite;
+            }
+        }
+    }
+
+    private Sprite GetCharacterSprite(string character, string expression) {
+        DialogueCharacter characterExpression = Resources.Load<DialogueCharacter>("Characters/" + character + "/" + expression);
+        if (characterExpression != null) {
+            return characterExpression.sprite;
+        }
+
+        return null;
     }
 
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 399262947}
   - component: {fileID: 399262946}
   m_Layer: 5
-  m_Name: LogText
+  m_Name: SpeakerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Log
+  m_text: Speaker
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -208,7 +208,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 65b0c0531308d3f419013d5ff997e9ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98d2334a945132245b18e04efbb9247b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -466,7 +466,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 65b0c0531308d3f419013d5ff997e9ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98d2334a945132245b18e04efbb9247b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -751,24 +751,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bced0d18d19f0e4182f8fe0cdf01202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogues:
-  - "The FitnessGram\u2122 Pacer Test is a multistage aerobic capacity test that
-    progressively gets more difficult as it continues."
-  - The 20 meter pacer test will begin in 30 seconds.
-  - Line up at the start.
-  - The running speed starts slowly, but gets faster each minute after you hear this
-    signal.
-  - '[beep]'
-  - A single lap should be completed each time you hear this sound.
-  - '[ding]'
-  - Remember to run in a straight line, and run as long as possible.
-  - The second time you fail to complete a lap before the sound, your test is over.
-  - The test will begin on the word start.
-  - On your mark, get ready, start.
   screenText: {fileID: 2714110886189370853}
   autoText: {fileID: 1145198767}
+  speakerText: {fileID: 399262946}
   dialoguePopup: {fileID: 2714110887039225954}
   continueTriangle: {fileID: 1660158225}
+  leftSprite: {fileID: 1112488200}
+  rightSprite: {fileID: 1644664235}
   scrollSpeed: 75
   isAuto: 0
   autoDelay: 1.5
