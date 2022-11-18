@@ -5,7 +5,8 @@ using TMPro;
 
 public class DialogueLoader : MonoBehaviour
 {
-    public List<string> dialogues;
+    public static DialogueLoader Instance { get; private set;}
+    public Dialogue dialogue;
     public TextMeshProUGUI screenText;
     public TextMeshProUGUI autoText;
     public GameObject dialoguePopup;
@@ -21,6 +22,15 @@ public class DialogueLoader : MonoBehaviour
     private int characterIndex;
     private float autoTimer;
 
+    private void Awake(){
+        if (Instance != null && Instance != this){
+            Destroy(this.gameObject);
+        }
+        else{
+            Instance = this;
+        }
+    }
+
     void Start() {
         scrollTimer = 0;
         autoTimer = 0;
@@ -29,7 +39,7 @@ public class DialogueLoader : MonoBehaviour
 
     void Update() {
 
-        if (dialoguePopup.activeInHierarchy && dialogueIndex < dialogues.Count) {
+        if (dialoguePopup.activeInHierarchy && dialogueIndex < dialogue.sentences.Length) {
 
             if (Input.GetKeyDown(KeyCode.A)) {
                 ToggleAuto();
@@ -40,7 +50,7 @@ public class DialogueLoader : MonoBehaviour
             }
 
             // Get the current dialogue in the list of dialogues
-            string currentDialogue = dialogues[dialogueIndex];
+            string currentDialogue = dialogue.sentences[dialogueIndex];
 
             // If the current dialogue hasn't finished yet
             if (characterIndex < currentDialogue.Length) {
@@ -74,7 +84,7 @@ public class DialogueLoader : MonoBehaviour
                     autoTimer = 0;
                     continueTriangle.SetActive(false);
 
-                    if (dialogueIndex >= dialogues.Count) {
+                    if (dialogueIndex >= dialogue.sentences.Length) {
                         EndDialogue();
                     }
                 }
@@ -85,8 +95,12 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
+    public void LoadDialogue(string text) {
+        dialogue = new Dialogue(text);
+    }
+
     public void StartDialogue() {
-        if (!dialoguePopup.activeInHierarchy) {
+        if (!IsInDialogue()) {
             dialoguePopup.SetActive(true);
             dialogueIndex = 0;
             characterIndex = 0;
@@ -96,13 +110,17 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
+    public bool IsInDialogue() {
+        if (dialoguePopup.activeInHierarchy) {
+            return true;
+        }
+
+        return false;
+    }
+
     public void EndDialogue() {
         dialoguePopup.SetActive(false);
         PlayerController.Instance.UnfreezePlayer();
-    }
-
-    public void LoadText(List<string> dialogue) {
-        this.dialogues = dialogue;
     }
 
     public void ToggleAuto() {
