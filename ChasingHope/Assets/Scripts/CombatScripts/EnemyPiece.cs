@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyPiece : Piece
 {
+    [Header("Enemy Stats")]
+
     public float moveSpeed;
     public Transform movePoint;
 
@@ -11,7 +13,6 @@ public class EnemyPiece : Piece
     public bool isMovingBetweenPoints;
 
     protected override void Start() {
-        base.Start();
         isMoving = false;
         movePoint.parent = null;
         IEnumerator coroutine = MovePiece(7, -7);
@@ -73,5 +74,16 @@ public class EnemyPiece : Piece
             Debug.Log("Reached the king");
             Destroy(this.gameObject);
         }
+    }
+
+    protected void Attack()
+    {
+        /*
+            while (IsInRange)
+            Enemy attack prio: 
+            1) Piece they are blocked by. 
+            2) the enemy King. 
+            3) the most recently Deployed Piece. 
+        */
     }
 }
