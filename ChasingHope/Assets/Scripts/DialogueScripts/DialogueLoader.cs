@@ -72,7 +72,7 @@ public class DialogueLoader : MonoBehaviour
 
                 // If user presses x while text is scrolling, skip scrolling
                 if (Input.GetKeyDown(KeyCode.X)) {
-                    screenText.text = currentDialogue;
+                    screenText.text += currentDialogue.Substring(characterIndex);
                     characterIndex = currentDialogue.Length;
                     scrollTimer = 0;
                 }
@@ -177,18 +177,16 @@ public class DialogueLoader : MonoBehaviour
             characterIndex += 2;    // Increment past the : and the space after
             Sprite tempSprite = GetCharacterSprite(speakerText.text, sb.ToString());
             if (tempSprite != null) {
-                UpdateExpression(tempSprite);
+                UpdateExpression(tempSprite, speakerText.text);
             }
         }
     }
 
-    private void UpdateExpression(Sprite sprite) {
-        if (leftSprite.gameObject.name == "LeftPortrait" || leftSprite.gameObject.name == speakerText.text) {
-            leftSprite.gameObject.name = speakerText.text;
+    private void UpdateExpression(Sprite sprite, string currSpeaker) {
+        if (currSpeaker == "Alice") {
             leftSprite.sprite = sprite;
         }
-        else if (rightSprite.gameObject.name == "RightPortrait" || rightSprite.gameObject.name == speakerText.text) {
-            rightSprite.gameObject.name = speakerText.text;
+        else {
             rightSprite.sprite = sprite;
         }
     }
