@@ -173,11 +173,23 @@ public class DialogueLoader : MonoBehaviour
                 sb.Append(currentDialogue[characterIndex]);
                 characterIndex++;
             }
+
             characterIndex += 2;    // Increment past the : and the space after
             Sprite tempSprite = GetCharacterSprite(speakerText.text, sb.ToString());
             if (tempSprite != null) {
-                leftSprite.sprite = tempSprite;
+                UpdateExpression(tempSprite);
             }
+        }
+    }
+
+    private void UpdateExpression(Sprite sprite) {
+        if (leftSprite.gameObject.name == "LeftPortrait" || leftSprite.gameObject.name == speakerText.text) {
+            leftSprite.gameObject.name = speakerText.text;
+            leftSprite.sprite = sprite;
+        }
+        else if (rightSprite.gameObject.name == "RightPortrait" || rightSprite.gameObject.name == speakerText.text) {
+            rightSprite.gameObject.name = speakerText.text;
+            rightSprite.sprite = sprite;
         }
     }
 
