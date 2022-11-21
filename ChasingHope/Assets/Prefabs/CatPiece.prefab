@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4032632878913903726}
   - component: {fileID: 4032632878913903725}
-  - component: {fileID: 64387472}
   - component: {fileID: 64387473}
-  - component: {fileID: 64387471}
+  - component: {fileID: 559958636}
+  - component: {fileID: 559958635}
+  - component: {fileID: 559958634}
   m_Layer: 0
   m_Name: CatPiece
   m_TagString: Piece
@@ -87,27 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &64387472
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4032632878913903724}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &64387473
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,7 +114,54 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.125, y: 1.125}
   m_EdgeRadius: 0
---- !u!114 &64387471
+--- !u!50 &559958636
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032632878913903724}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &559958635
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032632878913903724}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.125, y: 1.125}
+    newSize: {x: 1.125, y: 1.125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.125, y: 1.125}
+  m_EdgeRadius: 0
+--- !u!114 &559958634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,3 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebcbe78aaf007314eafff7dd3e084352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coord: {x: 0, y: 0}
+  block: 0
+  hopeCost: 0
+  cooldown: 0
+  range: 1.5
+  maxHealth: 20
+  attack: 10
+  defense: 5
+  currentTarget: {fileID: 0}
