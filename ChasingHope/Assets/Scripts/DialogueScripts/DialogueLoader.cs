@@ -192,7 +192,14 @@ public class DialogueLoader : MonoBehaviour
     }
 
     private Sprite GetCharacterSprite(string character, string expression) {
+        // Return parsed expression sprite
         DialogueCharacter characterExpression = Resources.Load<DialogueCharacter>("Characters/" + character + "/" + expression);
+        if (characterExpression != null) {
+            return characterExpression.sprite;
+        }
+        
+        // Return neutral expression if character found, null otherwise
+        characterExpression = Resources.Load<DialogueCharacter>("Characters/" + character + "/" + "neutral");
         if (characterExpression != null) {
             return characterExpression.sprite;
         }
