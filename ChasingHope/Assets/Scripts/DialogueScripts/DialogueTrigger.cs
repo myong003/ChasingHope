@@ -6,6 +6,14 @@ public class DialogueTrigger : MonoBehaviour
 {
     public TextAsset text;
 
+    public bool triggerOnStart;
+
+    void Start() {
+        if (triggerOnStart) {
+            TriggerDialogue();
+        }
+    }
+
     public void TriggerDialogue() {
         if (!DialogueLoader.Instance.IsInDialogue()) {
             DialogueLoader.Instance.LoadDialogue(text.text);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Text;
+using System;
 
 public class DialogueLoader : MonoBehaviour
 {
@@ -87,11 +88,19 @@ public class DialogueLoader : MonoBehaviour
                     screenText.text = "";
                     autoTimer = 0;
                     continueTriangle.SetActive(false);
-                    ParseSpeaker(dialogue.sentences[dialogueIndex]);
-                    ParseExpression(dialogue.sentences[dialogueIndex]);
 
                     if (dialogueIndex >= dialogue.sentences.Length) {
                         EndDialogue();
+                    }
+                    else {
+                        if (CheckForAction(dialogue.sentences[dialogueIndex])) {
+                            dialogueIndex++;
+                            if (dialogueIndex >= dialogue.sentences.Length) {
+                                EndDialogue();
+                            }
+                        }
+                        ParseSpeaker(dialogue.sentences[dialogueIndex]);
+                        ParseExpression(dialogue.sentences[dialogueIndex]);
                     }
                 }
                 else if (isAuto) {
@@ -114,8 +123,12 @@ public class DialogueLoader : MonoBehaviour
             scrollTimer = 0;
             PlayerController.Instance.FreezePlayer();
 
-            ParseSpeaker(dialogue.sentences[0]);
-            ParseExpression(dialogue.sentences[0]);
+            // while (CheckForAction(dialogue.sentences[dialogueIndex])) {
+            //     dialogueIndex++;
+            // }
+
+            ParseSpeaker(dialogue.sentences[dialogueIndex]);
+            ParseExpression(dialogue.sentences[dialogueIndex]);
         }
     }
 
@@ -141,6 +154,84 @@ public class DialogueLoader : MonoBehaviour
         }
         else {
             autoText.color = Color.white;
+        }
+    }
+
+    private bool CheckForAction(string currentDialogue) {
+
+        // Action found, do action
+        if (currentDialogue[0] == '{') {
+
+            // Get function
+            string function = GetWord(currentDialogue, 1);
+
+            switch (function) {
+                case "MoveCamera":
+                    Vector3 newPos = GetVector(currentDialogue);
+                    CameraManager cm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
+                    cm.CallPanCamera(newPos);
+                    break;
+                default:
+                    Debug.Log("Command not found " + function);
+                    break;
+            }
+
+            return true;
+        }
+        
+        // No action found
+        return false;
+    }
+
+    private string GetWord(string currentDialogue, int currentIndex) {
+        StringBuilder sb = new StringBuilder();
+        while (currentDialogue[currentIndex] != ' ') {
+            sb.Append(currentDialogue[currentIndex]);
+            currentIndex++;
+        }
+
+        return sb.ToString();
+    }
+
+    private Vector3 GetVector(string currentDialogue) {
+        int currIndex = currentDialogue.IndexOf("(") + 1;
+        string x, y, z;
+        int xInt, yInt, zInt;
+        StringBuilder sb = new StringBuilder();
+
+        while (currIndex < currentDialogue.Length && currentDialogue[currIndex] != ',') {
+            sb.Append(currentDialogue[currIndex]);
+            currIndex++;
+        }
+        x = sb.ToString();
+        sb.Clear();
+
+        currIndex++;
+        while (currIndex < currentDialogue.Length && currentDialogue[currIndex] != ',') {
+            sb.Append(currentDialogue[currIndex]);
+            currIndex++;
+        }
+        y = sb.ToString();
+        sb.Clear();
+
+        currIndex++;
+        while (currIndex < currentDialogue.Length && currentDialogue[currIndex] != ')') {
+            sb.Append(currentDialogue[currIndex]);
+            currIndex++;
+        }
+        z = sb.ToString();
+        sb.Clear();
+
+        try {
+            xInt = Int32.Parse(x);
+            yInt = Int32.Parse(y);
+            zInt = Int32.Parse(z);
+
+            return new Vector3(xInt, yInt, zInt);
+        }
+        catch (FormatException e) {
+            Debug.Log(e.Message);
+            return Vector3.zero;
         }
     }
 
