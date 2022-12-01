@@ -161,15 +161,16 @@ public class DialogueLoader : MonoBehaviour
 
         // Action found, do action
         if (currentDialogue[0] == '{') {
-
+            int currIndex = 1;
             // Get function
-            string function = GetWord(currentDialogue, 1);
+            string function = GetWord(currentDialogue, ref currIndex);
+            float panSpeed = float.Parse(GetWord(currentDialogue, ref currIndex));
 
             switch (function) {
                 case "MoveCamera":
                     Vector3 newPos = GetVector(currentDialogue);
                     CameraManager cm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
-                    cm.CallPanCamera(newPos);
+                    cm.CallPanCamera(newPos, panSpeed);
                     break;
                 default:
                     Debug.Log("Command not found " + function);
@@ -183,12 +184,13 @@ public class DialogueLoader : MonoBehaviour
         return false;
     }
 
-    private string GetWord(string currentDialogue, int currentIndex) {
+    private string GetWord(string currentDialogue, ref int currentIndex) {
         StringBuilder sb = new StringBuilder();
         while (currentDialogue[currentIndex] != ' ') {
             sb.Append(currentDialogue[currentIndex]);
             currentIndex++;
         }
+        currentIndex++;
 
         return sb.ToString();
     }

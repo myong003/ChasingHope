@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 9046395795281549137}
   m_Layer: 0
   m_Name: InteractTrigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9046395796145394526}
   - component: {fileID: 9046395796145394524}
-  - component: {fileID: 9046395796145394531}
   - component: {fileID: 9046395796145394530}
   m_Layer: 0
   m_Name: Alice
@@ -229,32 +228,6 @@ MonoBehaviour:
   collision:
     serializedVersion: 2
     m_Bits: 64
---- !u!61 &9046395796145394531
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9046395796145394529}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 1.3333334}
-    newSize: {x: 23.999998, y: 36.00879}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 23.999998, y: 36.00879}
-  m_EdgeRadius: 0
 --- !u!50 &9046395796145394530
 Rigidbody2D:
   serializedVersion: 4
