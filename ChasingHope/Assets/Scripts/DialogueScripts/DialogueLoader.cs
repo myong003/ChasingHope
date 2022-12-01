@@ -97,6 +97,7 @@ public class DialogueLoader : MonoBehaviour
                             dialogueIndex++;
                             if (dialogueIndex >= dialogue.sentences.Length) {
                                 EndDialogue();
+                                return;
                             }
                         }
                         ParseSpeaker(dialogue.sentences[dialogueIndex]);
