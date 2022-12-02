@@ -5,11 +5,13 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
 
-    private bool isPanning;
+    public bool isPanning;
 
     public void CallPanCamera(Vector3 newPos, float cameraMoveSpeed) {
-        IEnumerator coroutine = PanCamera(newPos, cameraMoveSpeed);
-        StartCoroutine(coroutine);
+        if (!isPanning) {
+            IEnumerator coroutine = PanCamera(newPos, cameraMoveSpeed);
+            StartCoroutine(coroutine);
+        }
     }
 
     private IEnumerator PanCamera(Vector3 newPos, float cameraMoveSpeed) {

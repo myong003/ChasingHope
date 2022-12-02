@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask collision;
 
+    [SerializeField]
+    private Animator animator;
+    private CameraManager cm;
+
     private bool isFrozen;
 
     // Make singleton to allow any script to access using PlayerController.Instance
@@ -30,13 +34,14 @@ public class PlayerController : MonoBehaviour
     {
         movePoint.parent = null;
         facingDirection = "up";
+        cm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-        if (!isFrozen) {
+        if (!isFrozen && !cm.isPanning) {
             CheckMovement();
         }
     }
@@ -81,24 +86,28 @@ public class PlayerController : MonoBehaviour
         {
             facingDirection = "up";
             interactTrigger.transform.position = alicePos + new Vector3(0, 0.5f, 0);
+            // animator.Play("AliceWalkUp");
         }
 
         else if (verticalInput <= -0.2f)
         {
             facingDirection = "down";
             interactTrigger.transform.position = alicePos + new Vector3(0, -0.5f, 0);
+            // animator.Play("AliceWalkDown");
         }
 
         else if (horizontalInput <= -0.2f)
         {
             facingDirection = "left";
             interactTrigger.transform.position = alicePos + new Vector3(-0.5f, 0, 0);
+            // animator.Play("AliceWalkLeft");
         }
 
         else if (horizontalInput >= 0.2f)
         {
             facingDirection = "right";
             interactTrigger.transform.position = alicePos + new Vector3(0.5f, 0, 0);
+            // animator.Play("AliceWalkRight");
         }
     }
 
