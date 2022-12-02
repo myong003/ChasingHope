@@ -79,6 +79,11 @@ public class PlayerController : MonoBehaviour
             {
                 movePoint.position += deltaY;
             }
+
+            animator.speed = 0;
+        }
+        else {
+            animator.speed = 1;
         }
 
         Vector3 alicePos = gameObject.transform.position;
