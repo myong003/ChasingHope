@@ -86,28 +86,28 @@ public class PlayerController : MonoBehaviour
         {
             facingDirection = "up";
             interactTrigger.transform.position = alicePos + new Vector3(0, 0.5f, 0);
-            // animator.Play("AliceWalkUp");
+            animator.Play("AliceWalkUp");
         }
 
         else if (verticalInput <= -0.2f)
         {
             facingDirection = "down";
             interactTrigger.transform.position = alicePos + new Vector3(0, -0.5f, 0);
-            // animator.Play("AliceWalkDown");
+            animator.Play("AliceWalkDown");
         }
 
         else if (horizontalInput <= -0.2f)
         {
             facingDirection = "left";
             interactTrigger.transform.position = alicePos + new Vector3(-0.5f, 0, 0);
-            // animator.Play("AliceWalkLeft");
+            animator.Play("AliceWalkLeft");
         }
 
         else if (horizontalInput >= 0.2f)
         {
             facingDirection = "right";
             interactTrigger.transform.position = alicePos + new Vector3(0.5f, 0, 0);
-            // animator.Play("AliceWalkRight");
+            animator.Play("AliceWalkRight");
         }
     }
 
