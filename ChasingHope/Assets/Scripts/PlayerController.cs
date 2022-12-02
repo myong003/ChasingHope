@@ -12,7 +12,14 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask collision;
 
+    [SerializeField]
+    private Animator animator;
+    private CameraManager cm;
+
     private bool isFrozen;
+    public int horizontalInput = 0;
+    private int verticalInput = 0;
+
 
     // Make singleton to allow any script to access using PlayerController.Instance
     // Note: might change later idk, only making this to let dialogue freeze movement
@@ -23,21 +30,33 @@ public class PlayerController : MonoBehaviour
         else {
             Instance = this;
         }
+
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         movePoint.parent = null;
-        facingDirection = "up";
+        facingDirection = "down";
+        cm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-        if (!isFrozen) {
+        if (!isFrozen && !cm.isPanning) {
             CheckMovement();
+        }
+
+        animator.SetFloat("horizontalMovement", horizontalInput);
+        animator.SetFloat("verticalMovement", verticalInput);
+        if (horizontalInput < -0.1 || horizontalInput > 0.1 || verticalInput < -0.1 || verticalInput > 0.1) {
+            animator.SetBool("isMoving", true);
+        }
+        else {
+            animator.SetBool("isMoving", false);
         }
     }
     
@@ -50,9 +69,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private void CheckMovement() {
-        int horizontalInput = 0;
-        int verticalInput = 0;
-
         // If player already on movePoint
         if (Vector3.Distance(movePoint.position, this.transform.position) <= 0.05f)
         {

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 356797306}
   m_Layer: 0
   m_Name: KingPiece
-  m_TagString: Piece
+  m_TagString: King
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,3 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebcbe78aaf007314eafff7dd3e084352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coord: {x: 0, y: 0}
+  block: 999
+  hopeCost: 0
+  cooldown: 0
+  range: 0
+  maxHealth: 100
+  attack: 10
+  defense: 5
+  currentTarget: {fileID: 0}
