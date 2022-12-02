@@ -14,11 +14,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Animator animator;
-    [SerializeField]
-    private AudioSource audioSource;
     private CameraManager cm;
 
     private bool isFrozen;
+    public int horizontalInput = 0;
+    private int verticalInput = 0;
+
 
     // Make singleton to allow any script to access using PlayerController.Instance
     // Note: might change later idk, only making this to let dialogue freeze movement
@@ -29,13 +30,15 @@ public class PlayerController : MonoBehaviour
         else {
             Instance = this;
         }
+
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         movePoint.parent = null;
-        facingDirection = "up";
+        facingDirection = "down";
         cm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
     }
 
@@ -45,6 +48,15 @@ public class PlayerController : MonoBehaviour
         this.transform.position = Vector3.MoveTowards(this.transform.position, movePoint.position, moveSpeed * Time.deltaTime);
         if (!isFrozen && !cm.isPanning) {
             CheckMovement();
+        }
+
+        animator.SetFloat("horizontalMovement", horizontalInput);
+        animator.SetFloat("verticalMovement", verticalInput);
+        if (horizontalInput < -0.1 || horizontalInput > 0.1 || verticalInput < -0.1 || verticalInput > 0.1) {
+            animator.SetBool("isMoving", true);
+        }
+        else {
+            animator.SetBool("isMoving", false);
         }
     }
     
@@ -57,9 +69,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private void CheckMovement() {
-        int horizontalInput = 0;
-        int verticalInput = 0;
-
         // If player already on movePoint
         if (Vector3.Distance(movePoint.position, this.transform.position) <= 0.05f)
         {
@@ -81,11 +90,6 @@ public class PlayerController : MonoBehaviour
             {
                 movePoint.position += deltaY;
             }
-
-            animator.speed = 0;
-        }
-        else {
-            animator.speed = 1;
         }
 
         Vector3 alicePos = gameObject.transform.position;
@@ -93,40 +97,24 @@ public class PlayerController : MonoBehaviour
         {
             facingDirection = "up";
             interactTrigger.transform.position = alicePos + new Vector3(0, 0.5f, 0);
-            animator.Play("AliceWalkUp");
-            // if (!audioSource.isPlaying) {
-            //     audioSource.Play();
-            // }        
         }
 
         else if (verticalInput <= -0.2f)
         {
             facingDirection = "down";
             interactTrigger.transform.position = alicePos + new Vector3(0, -0.5f, 0);
-            animator.Play("AliceWalkDown");
-            // if (!audioSource.isPlaying) {
-            //     audioSource.Play();
-            // }
         }
 
         else if (horizontalInput <= -0.2f)
         {
             facingDirection = "left";
             interactTrigger.transform.position = alicePos + new Vector3(-0.5f, 0, 0);
-            animator.Play("AliceWalkLeft");
-            // if (!audioSource.isPlaying) {
-            //     audioSource.Play();
-            // }        
         }
 
         else if (horizontalInput >= 0.2f)
         {
             facingDirection = "right";
             interactTrigger.transform.position = alicePos + new Vector3(0.5f, 0, 0);
-            animator.Play("AliceWalkRight");
-            // if (!audioSource.isPlaying) {
-            //     audioSource.Play();
-            // }        
         }
     }
 
