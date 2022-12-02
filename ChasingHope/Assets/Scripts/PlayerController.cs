@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private AudioSource audioSource;
     private CameraManager cm;
 
     private bool isFrozen;
@@ -92,6 +94,9 @@ public class PlayerController : MonoBehaviour
             facingDirection = "up";
             interactTrigger.transform.position = alicePos + new Vector3(0, 0.5f, 0);
             animator.Play("AliceWalkUp");
+            // if (!audioSource.isPlaying) {
+            //     audioSource.Play();
+            // }        
         }
 
         else if (verticalInput <= -0.2f)
@@ -99,6 +104,9 @@ public class PlayerController : MonoBehaviour
             facingDirection = "down";
             interactTrigger.transform.position = alicePos + new Vector3(0, -0.5f, 0);
             animator.Play("AliceWalkDown");
+            // if (!audioSource.isPlaying) {
+            //     audioSource.Play();
+            // }
         }
 
         else if (horizontalInput <= -0.2f)
@@ -106,6 +114,9 @@ public class PlayerController : MonoBehaviour
             facingDirection = "left";
             interactTrigger.transform.position = alicePos + new Vector3(-0.5f, 0, 0);
             animator.Play("AliceWalkLeft");
+            // if (!audioSource.isPlaying) {
+            //     audioSource.Play();
+            // }        
         }
 
         else if (horizontalInput >= 0.2f)
@@ -113,6 +124,9 @@ public class PlayerController : MonoBehaviour
             facingDirection = "right";
             interactTrigger.transform.position = alicePos + new Vector3(0.5f, 0, 0);
             animator.Play("AliceWalkRight");
+            // if (!audioSource.isPlaying) {
+            //     audioSource.Play();
+            // }        
         }
     }
 

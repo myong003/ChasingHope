@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 412cead291e9f7c429d7c39802418c2a, type: 3}
-  m_Name: laugh
+  m_Name: winking
   m_EditorClassIdentifier: 
   characterName: The Cat
-  expression: laugh
-  sprite: {fileID: 21300000, guid: 1906118269669044e80b1638b81bfc60, type: 3}
+  expression: winking
+  sprite: {fileID: 21300000, guid: dd2cb0e58c023dc449cda449173d5b7f, type: 3}
