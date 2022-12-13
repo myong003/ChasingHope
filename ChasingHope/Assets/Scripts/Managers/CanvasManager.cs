@@ -18,6 +18,7 @@ public class CanvasManager : MonoBehaviour
     }
 
     public void LoadCG(Sprite background) {
+        Debug.Log("LOading cg " + background);
         cg.sprite = background;
         cg.enabled = true;
     }

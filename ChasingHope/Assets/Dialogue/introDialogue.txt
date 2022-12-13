@@ -1,0 +1,3 @@
+Alice: Hope!
+{LoadCG IntroAlice}
+Game: Will you jump to chase hope?

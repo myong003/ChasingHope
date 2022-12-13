@@ -158,6 +158,16 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for an action marked by {} in the text, then parses and executes it
+    /// Currently supported actions:
+    /// {MoveCamera panSpeed (Vector3 newCameraPosition)}   :   Moves the camera to newCameraPosition
+    /// {LoadCG cgName}                                     :   Loads a cg
+    /// </summary>
+    /// <param name="currentDialogue"></param>
+    /// <returns>
+    /// Returns true if action found, false otherwise
+    /// </returns>
     private bool CheckForAction(string currentDialogue) {
 
         // Action found, do action
@@ -165,13 +175,20 @@ public class DialogueLoader : MonoBehaviour
             int currIndex = 1;
             // Get function
             string function = GetWord(currentDialogue, ref currIndex);
-            float panSpeed = float.Parse(GetWord(currentDialogue, ref currIndex));
 
+            Debug.Log(function);
             switch (function) {
                 case "MoveCamera":
+                    float panSpeed = float.Parse(GetWord(currentDialogue, ref currIndex));
                     Vector3 newPos = GetVector(currentDialogue);
                     CameraManager cm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
                     cm.CallPanCamera(newPos, panSpeed);
+                    break;
+                case "LoadCG":
+                    string cg = GetWord(currentDialogue, ref currIndex);
+                    Debug.Log(cg);
+                    Sprite cgSprite = Resources.Load<Sprite>("CGs/" + cg);
+                    CanvasManager.Instance.LoadCG(cgSprite);
                     break;
                 default:
                     Debug.Log("Command not found " + function);
@@ -187,7 +204,9 @@ public class DialogueLoader : MonoBehaviour
 
     private string GetWord(string currentDialogue, ref int currentIndex) {
         StringBuilder sb = new StringBuilder();
-        while (currentDialogue[currentIndex] != ' ') {
+
+        // Get every character until reaching a space character
+        while (currentIndex < currentDialogue.Length && currentDialogue[currentIndex] != ' ' && currentDialogue[currentIndex] != '}') {
             sb.Append(currentDialogue[currentIndex]);
             currentIndex++;
         }
