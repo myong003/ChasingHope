@@ -122,7 +122,9 @@ public class DialogueLoader : MonoBehaviour
             characterIndex = 0;
             screenText.text = "";
             scrollTimer = 0;
-            PlayerController.Instance.FreezePlayer();
+            if (PlayerController.Instance != null) {
+                PlayerController.Instance.FreezePlayer();
+            }
 
             // while (CheckForAction(dialogue.sentences[dialogueIndex])) {
             //     dialogueIndex++;
@@ -143,7 +145,9 @@ public class DialogueLoader : MonoBehaviour
 
     public void EndDialogue() {
         dialoguePopup.SetActive(false);
-        PlayerController.Instance.UnfreezePlayer();
+        if (PlayerController.Instance != null) {
+            PlayerController.Instance.UnfreezePlayer();
+        }
     }
 
     public void ToggleAuto() {
