@@ -849,6 +849,8 @@ MonoBehaviour:
   rightSprite: {fileID: 1644664235}
   scrollSpeed: 75
   isAuto: 0
+  canAuto: 1
+  canSkip: 1
   autoDelay: 1.5
 --- !u!1 &2714110886189370851
 GameObject:
@@ -1102,6 +1104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cg: {fileID: 6298610420021441078}
+  isFading: 0
 --- !u!1 &2714110887039225954
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class DialogueLoader : MonoBehaviour
 
     public float scrollSpeed;   // How fast the text moves
     public bool isAuto;
+    public bool canAuto;
+    public bool canSkip;
     public float autoDelay;     // How long before the text automatically continues in auto
 
     private float scrollTimer;
@@ -46,11 +48,11 @@ public class DialogueLoader : MonoBehaviour
 
         if (dialoguePopup.activeInHierarchy && dialogueIndex < dialogue.sentences.Length) {
 
-            if (Input.GetKeyDown(KeyCode.A)) {
+            if (Input.GetKeyDown(KeyCode.A) && canAuto) {
                 ToggleAuto();
             }
 
-            if (Input.GetKeyDown(KeyCode.S)) {
+            if (Input.GetKeyDown(KeyCode.S) && canSkip) {
                 EndDialogue();
             }
 

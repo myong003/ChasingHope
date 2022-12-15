@@ -27,22 +27,17 @@ public class IntroCutscene : DialogueTrigger
         switch(phase) {
             case 1:
                 if (!inCutscene) {
-                    StartCoroutine(StartDialogue());
+                    StartCoroutine(AliceCutscene());
                 }
                 break;
             case 2:
                 if (!inCutscene) {
-                    StartCoroutine(StartAliceCutscene());
+                    StartCoroutine(RabbitCutscene());
                 }
                 break;
             case 3:
                 if (!inCutscene) {
-                    StartCoroutine(StartRabbitCutscene());
-                }
-                break;
-            case 4:
-                if (!inCutscene) {
-                    StartCoroutine(StartChaseHope());
+                    StartCoroutine(ChaseHopeScene());
                 }
                 break;
             default:
@@ -51,32 +46,49 @@ public class IntroCutscene : DialogueTrigger
         }
     }
 
-    private IEnumerator StartDialogue() {
+    // private IEnumerator StartDialogue() {
+    //     inCutscene = true;
+    //     TriggerDialogue();
+
+    //     while (DialogueLoader.Instance.IsInDialogue()) {
+    //         yield return null;
+    //     }
+
+    //     inCutscene = false;
+    //     phase++;
+    // }
+
+    private IEnumerator AliceCutscene() {
         inCutscene = true;
         TriggerDialogue();
-
-        while (DialogueLoader.Instance.IsInDialogue()) {
-            yield return null;
-        }
-
-        inCutscene = false;
-        phase++;
-    }
-
-    private IEnumerator StartAliceCutscene() {
-        inCutscene = true;
         CanvasManager.Instance.LoadCG(aliceCG);
         footStepAudio.Play();
 
         yield return new WaitForSeconds(cutsceneTime);
+        CanvasManager.Instance.FadeToBlack(cutsceneFadeSpeed * Time.deltaTime);
         footStepAudio.Stop();
+
+        // Don't do anything while fading to black
+        while (CanvasManager.Instance.isFading) {
+            yield return null;
+        }
+
+        // Wait a little bit in black screen before transitioning to next phase
+        yield return new WaitForSeconds(cutsceneTime / 5);
+
         inCutscene = false;
         phase++;
     }
 
-    private IEnumerator StartRabbitCutscene() {
+    private IEnumerator RabbitCutscene() {
         inCutscene = true;
         CanvasManager.Instance.LoadCG(rabbitCG);
+        CanvasManager.Instance.FadeIn(cutsceneFadeSpeed * Time.deltaTime);
+
+        // Don't do anything while fading in
+        while (CanvasManager.Instance.isFading) {
+            yield return null;
+        }
 
         // Wait on rabbit scene before fading to black
         yield return new WaitForSeconds(cutsceneTime);
@@ -88,13 +100,13 @@ public class IntroCutscene : DialogueTrigger
         }
 
         // Wait a little bit in black screen before transitioning to next phase
-        yield return new WaitForSeconds(cutsceneTime / 2);
+        yield return new WaitForSeconds(cutsceneTime / 5);
 
         inCutscene = false;
         phase++;
     }
 
-    private IEnumerator StartChaseHope() {
+    private IEnumerator ChaseHopeScene() {
         inCutscene = true;
         CanvasManager.Instance.LoadCG(chasingHopeCG);
         CanvasManager.Instance.FadeIn(cutsceneFadeSpeed * Time.deltaTime);
