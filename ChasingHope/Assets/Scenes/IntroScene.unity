@@ -407,7 +407,7 @@ MonoBehaviour:
   footStepAudio: {fileID: 25064294}
   chasingHopePrompt: {fileID: 2101902607}
   cutsceneTime: 3
-  cutsceneFadeSpeed: 1
+  cutsceneFadeSpeed: 1.25
   phase: 1
 --- !u!224 &93686097 stripped
 RectTransform:
@@ -912,7 +912,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2714110885916841757, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714110885916841759, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: isAuto
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714110885916841759, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: canAuto
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714110885916841759, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: canSkip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714110885916841759, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: autoDelay
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2714110886306837696, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
       propertyPath: m_Camera
@@ -1008,7 +1024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2714110887039225954, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2714110887039225957, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
       propertyPath: m_AnchoredPosition.y
