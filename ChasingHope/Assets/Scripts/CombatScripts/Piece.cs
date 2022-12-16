@@ -22,11 +22,11 @@ public class Piece : MonoBehaviour
     protected virtual void Awake()
     {
         currHealth = maxHealth;
+        UpdateCoords();
     }
 
     protected virtual void Start() 
     {
-        UpdateCoords();
         InvokeRepeating("UpdateTarget", 0f, 0.2f);
     }
 

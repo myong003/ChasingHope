@@ -15,7 +15,9 @@ public class EnemyPiece : Piece
     protected override void Start() {
         isMoving = false;
         movePoint.parent = null;
-        IEnumerator coroutine = MovePiece(7, -7);
+        Piece kingPiece = GameObject.FindGameObjectWithTag("King").GetComponent<Piece>();
+
+        IEnumerator coroutine = MovePiece(kingPiece.coord.x, kingPiece.coord.y);
         StartCoroutine(coroutine);
     }
 
