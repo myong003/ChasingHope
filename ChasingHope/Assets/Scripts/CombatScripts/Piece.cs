@@ -5,6 +5,7 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
     public Vector2Int coord;
+    public bool active = false;
 
     [Header("Stats")]
     public int block;

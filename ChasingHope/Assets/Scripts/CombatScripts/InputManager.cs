@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
         Wait, ClickedPiece
     };
     public GameObject pieceHighlight;
+    public BoardField gameBoard;
 
     public State currState;
     public GameObject pieceHeld;
@@ -97,7 +98,11 @@ public class InputManager : MonoBehaviour
                 int newX = Mathf.RoundToInt(currPos.x);
                 int newY = Mathf.RoundToInt(currPos.y);
 
-                pieceHeld.transform.position = new Vector3(newX, newY, -5);
+                // pieceHeld.transform.position = new Vector3(newX, newY, -5);
+
+                if (!gameBoard.CheckSpaceOccupied(newX, -newY)) {
+                    MovePiece(pieceHeld.GetComponent<Piece>(), newX, newY);
+                }
             }
             else {
                 pieceHeld.transform.position = pieceOldPos;
@@ -108,5 +113,10 @@ public class InputManager : MonoBehaviour
         }
 
         currState = State.Wait;
+    }
+    
+    private void MovePiece(Piece currPiece, int newX, int newY) {
+        currPiece.transform.position = new Vector3(newX, newY, -5);
+        gameBoard.AddPiece(currPiece, newX, -newY);
     }
 }
