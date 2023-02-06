@@ -179,13 +179,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coord: {x: 0, y: 0}
+  active: 0
   block: 0
   hopeCost: 0
   cooldown: 0
   range: 1
-  maxHealth: 10
+  maxHealth: 5
   attack: 2
   defense: 2
+  currentTarget: {fileID: 0}
   moveSpeed: 1
   movePoint: {fileID: 2182383310006795781}
   isMoving: 0

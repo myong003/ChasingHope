@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - enemy: {fileID: 4032632878913903726, guid: 3ac84cebfabad584b921ab6fc09ff9c5, type: 3}
-    count: 5
+    count: 1
     rate: 0.5
   waveIndex: 0
   spawnPoints:
@@ -2226,6 +2226,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 192343975}
     m_Modifications:
+    - target: {fileID: 1426834266, guid: 60a9de78b0e416b4b9180c8500383a1d, type: 3}
+      propertyPath: block
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6122502801046756407, guid: 60a9de78b0e416b4b9180c8500383a1d, type: 3}
       propertyPath: m_RootOrder
       value: 1
