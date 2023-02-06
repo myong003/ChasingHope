@@ -402,7 +402,10 @@ MonoBehaviour:
   text: {fileID: 4900000, guid: ba4e042c7b680fd4484bde0ed92f8d1e, type: 3}
   triggerOnStart: 0
   aliceCG: {fileID: 21300000, guid: 2047d643316fd0641b1e9cb1d518c0bc, type: 3}
-  rabbitCG: {fileID: 21300000, guid: 19d0e012c9229f14ba12a50aba5f99a0, type: 3}
+  rabbitCG1: {fileID: 21300000, guid: 5d4f2ddf40874ec45912255f4d1fd63c, type: 3}
+  rabbitCG2: {fileID: 21300000, guid: 85cc157b2b604b04ba3b1bdf8af57467, type: 3}
+  rabbitCG3: {fileID: 21300000, guid: fc23ed83e642c614daefafea22542a1c, type: 3}
+  rabbitCG4: {fileID: 21300000, guid: 42088684a80a7c34abc55245b157dd73, type: 3}
   chasingHopeCG: {fileID: 21300000, guid: 0ec9f00ec92fc054f96c3ff9716db2fc, type: 3}
   footStepAudio: {fileID: 25064294}
   chasingHopePrompt: {fileID: 2101902607}

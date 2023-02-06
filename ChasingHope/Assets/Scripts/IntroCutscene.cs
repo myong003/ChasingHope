@@ -5,7 +5,10 @@ using UnityEngine;
 public class IntroCutscene : DialogueTrigger
 {
     public Sprite aliceCG;
-    public Sprite rabbitCG;
+    public Sprite rabbitCG1;
+    public Sprite rabbitCG2;
+    public Sprite rabbitCG3;
+    public Sprite rabbitCG4;
     public Sprite chasingHopeCG;
     public AudioSource footStepAudio;
     public GameObject chasingHopePrompt;
@@ -32,10 +35,25 @@ public class IntroCutscene : DialogueTrigger
                 break;
             case 2:
                 if (!inCutscene) {
-                    StartCoroutine(RabbitCutscene());
+                    StartCoroutine(RabbitCutscene(rabbitCG1));
                 }
                 break;
             case 3:
+                if (!inCutscene) {
+                    StartCoroutine(RabbitCutscene(rabbitCG2));
+                }
+                break;
+            case 4:
+                if (!inCutscene) {
+                    StartCoroutine(RabbitCutscene(rabbitCG3));
+                }
+                break;
+            case 5:
+                if (!inCutscene) {
+                    StartCoroutine(RabbitCutscene(rabbitCG4));
+                }
+                break;
+            case 6:
                 if (!inCutscene) {
                     StartCoroutine(ChaseHopeScene());
                 }
@@ -80,9 +98,9 @@ public class IntroCutscene : DialogueTrigger
         phase++;
     }
 
-    private IEnumerator RabbitCutscene() {
+    private IEnumerator RabbitCutscene(Sprite cg) {
         inCutscene = true;
-        CanvasManager.Instance.LoadCG(rabbitCG);
+        CanvasManager.Instance.LoadCG(cg);
         CanvasManager.Instance.FadeIn(cutsceneFadeSpeed * Time.deltaTime);
 
         // Don't do anything while fading in
