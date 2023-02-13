@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - enemy: {fileID: 4032632878913903726, guid: 3ac84cebfabad584b921ab6fc09ff9c5, type: 3}
-    count: 1
+    count: 4
     rate: 0.5
   waveIndex: 0
   spawnPoints:
@@ -2179,7 +2179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351853966984503652, guid: f495cc7ed6f230b44af09ead5f35b11d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1351853966984503652, guid: f495cc7ed6f230b44af09ead5f35b11d, type: 3}
       propertyPath: m_LocalPosition.y

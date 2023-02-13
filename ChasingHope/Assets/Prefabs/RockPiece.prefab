@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1426834267}
   - component: {fileID: 1426834268}
   - component: {fileID: 1426834266}
+  - component: {fileID: 3882696067540617867}
   m_Layer: 0
   m_Name: RockPiece
   m_TagString: Piece
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coord: {x: 0, y: 0}
+  active: 0
   block: 0
   hopeCost: 0
   cooldown: 0
@@ -155,3 +157,29 @@ MonoBehaviour:
   attack: 5
   defense: 5
   currentTarget: {fileID: 0}
+--- !u!61 &3882696067540617867
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122502801046756409}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.95}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.9375, y: 0.9375}
+    newSize: {x: 0.9375, y: 0.9375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0

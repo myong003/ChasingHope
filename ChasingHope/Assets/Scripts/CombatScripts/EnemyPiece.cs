@@ -8,53 +8,100 @@ public class EnemyPiece : Piece
 
     public float moveSpeed;
     public Transform movePoint;
-
-    public bool isMoving;
     public bool isMovingBetweenPoints;
+    public bool isFrozen;
+    private Piece kingPiece;
+    private Vector2Int direction;
 
     protected override void Start() {
-        isMoving = false;
         movePoint.parent = null;
-        Piece kingPiece = GameObject.FindGameObjectWithTag("King").GetComponent<Piece>();
+        isFrozen = false;
+        kingPiece = GameObject.FindGameObjectWithTag("King").GetComponent<Piece>();
 
-        IEnumerator coroutine = MovePiece(kingPiece.coord.x, kingPiece.coord.y);
-        StartCoroutine(coroutine);
+        // IEnumerator coroutine = MovePiece(kingPiece.coord.x, kingPiece.coord.y);
+        // StartCoroutine(coroutine);
     }
 
-    public IEnumerator MovePiece(int newX, int newY) {
-        isMoving = true;
-        IEnumerator coroutine;
-        int xDir = 0, yDir = 0;
-        
-        while (coord.x != newX || coord.y != newY) {
-            if (coord.x > newX) {
-                xDir = -1;
-            }
-            else if (coord.x < newX) {
-                xDir = 1;
-            }
-
-            if (coord.y > newY) {
-                yDir = -1;
-            }
-            else if (coord.y < newY) {
-                yDir = 1;
-            }
-
-            if (coord.x != newX) {
-                coroutine = MoveOneSquare(xDir, 0);
-                StartCoroutine(coroutine);
-                yield return new WaitUntil(() => !isMovingBetweenPoints);
-            }
-
-            if (coord.y != newY) {
-                coroutine = MoveOneSquare(0, yDir);
-                StartCoroutine(coroutine);
-                yield return new WaitUntil(() => !isMovingBetweenPoints);
-            }
+    protected override void Update() {
+        if (!isMovingBetweenPoints && !isFrozen) {
+            UpdateDirection();
+            StartCoroutine(MoveOneSquare(direction.x, direction.y));
         }
-        isMoving = false;
     }
+
+    private void UpdateDirection() {
+        int newX = kingPiece.coord.x;
+        int newY = kingPiece.coord.y;
+        int xDir = 0, yDir = 0;
+
+        if (coord.x > newX) {
+            xDir = -1;
+        }
+        else if (coord.x < newX) {
+            xDir = 1;
+        }
+
+        if (coord.y > newY) {
+            yDir = -1;
+        }
+        else if (coord.y < newY) {
+            yDir = 1;
+        }
+
+        if (direction.x == 0 && xDir != 0) {
+            direction.x = xDir;
+            direction.y = 0;
+        }
+        else if (direction.y == 0 && yDir != 0) {
+            direction.x = 0;
+            direction.y = yDir;
+        }
+
+        // if (coord.x != newX) {
+        //     coroutine = MoveOneSquare(xDir, 0);
+        //     StartCoroutine(coroutine);
+        //     yield return new WaitUntil(() => !isMovingBetweenPoints);
+        // }
+
+        // if (coord.y != newY) {
+        //     coroutine = MoveOneSquare(0, yDir);
+        //     StartCoroutine(coroutine);
+        //     yield return new WaitUntil(() => !isMovingBetweenPoints);
+        // }
+    }
+
+    // public IEnumerator MovePiece(int newX, int newY) {
+    //     IEnumerator coroutine;
+    //     int xDir = 0, yDir = 0;
+        
+    //     while (coord.x != newX || coord.y != newY) {
+    //         if (coord.x > newX) {
+    //             xDir = -1;
+    //         }
+    //         else if (coord.x < newX) {
+    //             xDir = 1;
+    //         }
+
+    //         if (coord.y > newY) {
+    //             yDir = -1;
+    //         }
+    //         else if (coord.y < newY) {
+    //             yDir = 1;
+    //         }
+
+    //         if (coord.x != newX) {
+    //             coroutine = MoveOneSquare(xDir, 0);
+    //             StartCoroutine(coroutine);
+    //             yield return new WaitUntil(() => !isMovingBetweenPoints);
+    //         }
+
+    //         if (coord.y != newY) {
+    //             coroutine = MoveOneSquare(0, yDir);
+    //             StartCoroutine(coroutine);
+    //             yield return new WaitUntil(() => !isMovingBetweenPoints);
+    //         }
+    //     }
+    // }
 
     private IEnumerator MoveOneSquare(int xDir, int yDir) {
         isMovingBetweenPoints = true;

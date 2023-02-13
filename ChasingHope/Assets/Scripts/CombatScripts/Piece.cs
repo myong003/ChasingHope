@@ -18,6 +18,7 @@ public class Piece : MonoBehaviour
 
     private float attackCountdown = 0f;
     private float currHealth;
+    private List<EnemyPiece> enemiesBlocked;
 
     protected virtual void Awake()
     {
@@ -28,6 +29,7 @@ public class Piece : MonoBehaviour
     protected virtual void Start() 
     {
         InvokeRepeating("UpdateTarget", 0f, 0.2f);
+        enemiesBlocked = new List<EnemyPiece>();
     }
 
     public void UpdateCoords() 
@@ -97,5 +99,15 @@ public class Piece : MonoBehaviour
             Debug.Log("dead");
         else
             Debug.Log("Health Remaining: " + this.currHealth);
+    }
+
+    private void OnTriggerEnter2D(Collider2D coll) {
+        if (coll.gameObject.tag == "Enemy" && enemiesBlocked.Count < block) {
+            EnemyPiece enemy;
+            if (coll.gameObject.TryGetComponent<EnemyPiece>(out enemy)) {
+                enemy.isFrozen = true;
+                enemiesBlocked.Add(enemy);
+            }
+        }
     }
 }
