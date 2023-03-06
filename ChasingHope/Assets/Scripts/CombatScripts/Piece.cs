@@ -6,6 +6,7 @@ public class Piece : MonoBehaviour
 {
     public Vector2Int coord;
     public bool active = false;
+    public Player player;
 
     [Header("Stats")]
     public int block;
@@ -39,6 +40,21 @@ public class Piece : MonoBehaviour
         coord = new Vector2Int(newX, newY);
     }
 
+    public void PlacePiece()
+    {
+        player.reduceHope(hopeCost);
+        Debug.Log("Piece placed. Current Hope: " + player.currHope + "/" + player.maxHope);
+    }
+
+    public bool CanPlace()
+    {
+        if (hopeCost > player.currHope)
+        {
+            return false;
+        }
+        return true;
+    }
+
     protected virtual void Update() 
     {
         if (currHealth <= 0f)
@@ -53,7 +69,7 @@ public class Piece : MonoBehaviour
             attackCountdown = 1f;
         }
 
-        attackCountdown -= Time.deltaTime;
+        attackCountdown -= .02f;
     }
 
     public GameObject currentTarget;
@@ -95,10 +111,10 @@ public class Piece : MonoBehaviour
     void TakeDamage(float rawDamage)
     {
         this.currHealth -= rawDamage - this.defense;
-        if (this.currHealth <= 0)
-            Debug.Log("dead");
-        else
-            Debug.Log("Health Remaining: " + this.currHealth);
+        // if (this.currHealth <= 0)
+        //     // Debug.Log("dead");
+        // else
+        //     // Debug.Log("Health Remaining: " + this.currHealth);
     }
 
     private void OnTriggerEnter2D(Collider2D coll) {
