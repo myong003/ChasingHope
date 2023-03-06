@@ -147,8 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coord: {x: 0, y: 0}
+  player: {fileID: 0}
   block: 0
-  hopeCost: 0
+  hopeCost: 3
   cooldown: 0
   range: 1.5
   maxHealth: 10

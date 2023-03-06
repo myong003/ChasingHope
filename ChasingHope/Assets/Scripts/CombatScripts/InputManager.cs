@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
 
     public State currState;
     public GameObject pieceHeld;
+    public Piece pieceHit;
 
     private Vector3 pieceOldPos;
 
@@ -43,7 +44,7 @@ public class InputManager : MonoBehaviour
 
                     // If raycast hit an object with a collider
                     if (hit.collider != null) {
-                        Piece pieceHit;
+                        // Piece pieceHit;
 
                         // If raycast hit a friendly inactive piece
                         if (hit.collider.gameObject.TryGetComponent<Piece>(out pieceHit)) {
@@ -60,7 +61,7 @@ public class InputManager : MonoBehaviour
 
                     // If raycast hit an object with a collider
                     if (hit.collider != null) {
-                        Piece pieceHit;
+                        // Piece pieceHit;
 
                         // If raycast hit a friendly inactive piece
                         if (hit.collider.gameObject.TryGetComponent<Piece>(out pieceHit)) {
@@ -69,6 +70,7 @@ public class InputManager : MonoBehaviour
                     } 
                     else {
                         ReleasePiece(mousePos);
+                        pieceHit.PlacePiece();
                     }
                 }
                 break;
@@ -81,6 +83,11 @@ public class InputManager : MonoBehaviour
     }
 
     public void ClickPiece(Piece pieceClicked) {
+        if (!pieceClicked.CanPlace())
+        {
+            Debug.Log("You don't have enough HOPE!");
+            return;
+        }
         pieceHeld = pieceClicked.gameObject;
         pieceOldPos = pieceHeld.transform.position;
 

@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coord: {x: 0, y: 0}
+  player: {fileID: 0}
   block: 0
   hopeCost: 0
   cooldown: 0
@@ -186,7 +187,8 @@ MonoBehaviour:
   maxHealth: 10
   attack: 2
   defense: 2
-  moveSpeed: 1
+  currentTarget: {fileID: 0}
+  moveSpeed: 0.5
   movePoint: {fileID: 2182383310006795781}
   isMoving: 0
   isMovingBetweenPoints: 0
