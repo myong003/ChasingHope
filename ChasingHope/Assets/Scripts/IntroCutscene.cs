@@ -180,7 +180,7 @@ public class IntroCutscene : DialogueTrigger
         float totalTimer = 0;
         while (totalTimer < pulseTime) {
             if (heartbeatTimer >= heartbeatFrequency) {
-                audioManager.PlayClip(heartbeatSingle);
+                audioManager.PlayClip(heartbeatSingle, 0.5f);
                 heartbeatTimer = 0;
                 heartbeatFrequency += slowAmount;
             }
@@ -194,9 +194,9 @@ public class IntroCutscene : DialogueTrigger
 
         totalTimer = 0;
         audioManager.ToggleLoop();
-        audioManager.PlayClip(heartbeatFlat);
-        
-        while (totalTimer < heartbeatFrequency) {
+        audioManager.PlayClip(heartbeatFlat, 0.5f);
+
+        while (totalTimer < 5) {
             yield return null;
         }
 
