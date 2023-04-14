@@ -310,6 +310,9 @@ MonoBehaviour:
   rabbitCG3: {fileID: 21300000, guid: fc23ed83e642c614daefafea22542a1c, type: 3}
   rabbitCG4: {fileID: 21300000, guid: 42088684a80a7c34abc55245b157dd73, type: 3}
   chasingHopeCG: {fileID: 21300000, guid: dfcecacf7b14f7a41bbbf1010f30c836, type: 3}
+  CG7: {fileID: 21300000, guid: a2e1baad52ecc414e9e33edf0a3b2616, type: 3}
+  CG8: {fileID: 21300000, guid: 1d61032dc037ad2438a923b26d098730, type: 3}
+  CG9: {fileID: 21300000, guid: b50b2519aa945ae4c82212258937b7a0, type: 3}
   audioManager: {fileID: 1207433363}
   footStepAudio: {fileID: 8300000, guid: 61f4a42aaf37ee4479dab49fdab817f5, type: 3}
   heartbeatSingle: {fileID: 8300000, guid: d050fa386d113484a967cd1ffa1b9f82, type: 3}
@@ -321,7 +324,7 @@ MonoBehaviour:
   pulseTime: 10
   startFrequency: 1
   slowAmount: 0.25
-  phase: 6
+  phase: 1
 --- !u!224 &93686097 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2714110886306837699, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
@@ -1103,6 +1106,18 @@ PrefabInstance:
     - target: {fileID: 2714110887039225957, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Size.x
+      value: 5.505
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Size.y
+      value: 3.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IntroCutscene : DialogueTrigger
 {
@@ -11,6 +12,9 @@ public class IntroCutscene : DialogueTrigger
     public Sprite rabbitCG3;
     public Sprite rabbitCG4;
     public Sprite chasingHopeCG;
+    public Sprite CG7;      // Alice looking down
+    public Sprite CG8;      // Alice jumping 1
+    public Sprite CG9;      // Alice jumping 2
 
     [Header("Audio")]
     public AudioManager audioManager;
@@ -74,6 +78,24 @@ public class IntroCutscene : DialogueTrigger
                 if (!inCutscene) {
                     StartCoroutine(EndGameCutscene());
                 }
+                break;
+            case 8:
+                if (!inCutscene) {
+                    StartCoroutine(RabbitCutscene(CG7));
+                }
+                break;
+            case 9:
+                if (!inCutscene) {
+                    StartCoroutine(RabbitCutscene(CG8));
+                }
+                break;
+            case 10:
+                if (!inCutscene) {
+                    StartCoroutine(RabbitCutscene(CG9));
+                }
+                break;
+            case 11:
+                SceneManager.LoadScene(1);
                 break;
             default:
                 Debug.Log("Scene finished at phase " + phase);
@@ -165,12 +187,12 @@ public class IntroCutscene : DialogueTrigger
             phase = 8;
         }
 
+        chasingHopePrompt.SetActive(false);
         inCutscene = false;
     }
 
     private IEnumerator EndGameCutscene() {
         inCutscene = true;
-        chasingHopePrompt.SetActive(false);
 
         float fadeSpeed = Time.deltaTime / (pulseTime - 3.0f);
         CanvasManager.Instance.FadeToBlack(fadeSpeed);
