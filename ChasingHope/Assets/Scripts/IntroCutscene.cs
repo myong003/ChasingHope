@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class IntroCutscene : DialogueTrigger
 {
+    [Header("CGs")]
     public Sprite aliceCG;
     public Sprite rabbitCG1;
     public Sprite rabbitCG2;
     public Sprite rabbitCG3;
     public Sprite rabbitCG4;
     public Sprite chasingHopeCG;
-    public AudioSource footStepAudio;
+
+    [Header("Audio")]
+    public AudioManager audioManager;
+    public AudioClip footStepAudio;
+    public AudioClip heartbeatSingle;
+    public AudioClip heartbeatFlat;
     public GameObject chasingHopePrompt;
+    public CursorInput cursor;
     public float cutsceneTime;      // How long each cutscene is on screen before transitioning
     public float cutsceneFadeSpeed;
+    
+    [Header("Heartbeat")]
+    public float pulseTime;         // How long until heartbeat flats
+    public float startFrequency;
+    public float slowAmount;        // How much the heartbeats slow down
 
     public int phase = 1;
     private bool inCutscene = false;
@@ -58,6 +70,11 @@ public class IntroCutscene : DialogueTrigger
                     StartCoroutine(ChaseHopeScene());
                 }
                 break;
+            case 7: // Game over
+                if (!inCutscene) {
+                    StartCoroutine(EndGameCutscene());
+                }
+                break;
             default:
                 Debug.Log("Scene finished at phase " + phase);
                 break;
@@ -80,11 +97,12 @@ public class IntroCutscene : DialogueTrigger
         inCutscene = true;
         TriggerDialogue();
         CanvasManager.Instance.LoadCG(aliceCG);
-        footStepAudio.Play();
+        audioManager.ToggleLoop();
+        audioManager.PlayClip(footStepAudio);
 
         yield return new WaitForSeconds(cutsceneTime);
         CanvasManager.Instance.FadeToBlack(cutsceneFadeSpeed * Time.deltaTime);
-        footStepAudio.Stop();
+        audioManager.Stop();
 
         // Don't do anything while fading to black
         while (CanvasManager.Instance.isFading) {
@@ -135,7 +153,56 @@ public class IntroCutscene : DialogueTrigger
 
         chasingHopePrompt.SetActive(true);
 
+        while (cursor.currPosition == -1) {
+            yield return null;
+        }
+
+        if (cursor.currPosition == 1) {
+            // Game over
+            phase++;
+        }
+        else if (cursor.currPosition == 0) {
+            phase = 8;
+        }
+
         inCutscene = false;
-        phase++;
+    }
+
+    private IEnumerator EndGameCutscene() {
+        inCutscene = true;
+        chasingHopePrompt.SetActive(false);
+
+        float fadeSpeed = Time.deltaTime / (pulseTime - 3.0f);
+        CanvasManager.Instance.FadeToBlack(fadeSpeed);
+
+        float heartbeatTimer = startFrequency;
+        float heartbeatFrequency = startFrequency;
+        float totalTimer = 0;
+        while (totalTimer < pulseTime) {
+            if (heartbeatTimer >= heartbeatFrequency) {
+                audioManager.PlayClip(heartbeatSingle);
+                heartbeatTimer = 0;
+                heartbeatFrequency += slowAmount;
+            }
+            else {
+                heartbeatTimer += Time.deltaTime;
+            }
+
+            totalTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        totalTimer = 0;
+        audioManager.ToggleLoop();
+        audioManager.PlayClip(heartbeatFlat);
+        
+        while (totalTimer < heartbeatFrequency) {
+            yield return null;
+        }
+
+        audioManager.Stop();
+
+        phase = -1;
+        inCutscene = false;
     }
 }

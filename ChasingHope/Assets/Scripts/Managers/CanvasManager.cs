@@ -40,7 +40,7 @@ public class CanvasManager : MonoBehaviour
         Color tempColor = cg.color;
 
         while (tempColor.a > 0) {
-            Debug.Log(tempColor.a);
+            // Debug.Log(tempColor.a);
             tempColor.a -= fadeSpeed;
             cg.color = tempColor;
             yield return null;

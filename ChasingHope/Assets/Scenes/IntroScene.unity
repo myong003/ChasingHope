@@ -406,7 +406,7 @@ MonoBehaviour:
   rabbitCG2: {fileID: 21300000, guid: 85cc157b2b604b04ba3b1bdf8af57467, type: 3}
   rabbitCG3: {fileID: 21300000, guid: fc23ed83e642c614daefafea22542a1c, type: 3}
   rabbitCG4: {fileID: 21300000, guid: 42088684a80a7c34abc55245b157dd73, type: 3}
-  chasingHopeCG: {fileID: 21300000, guid: 0ec9f00ec92fc054f96c3ff9716db2fc, type: 3}
+  chasingHopeCG: {fileID: 21300000, guid: dfcecacf7b14f7a41bbbf1010f30c836, type: 3}
   footStepAudio: {fileID: 25064294}
   chasingHopePrompt: {fileID: 2101902607}
   cutsceneTime: 3
