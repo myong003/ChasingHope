@@ -5,6 +5,8 @@ using UnityEngine;
 public class CursorInput : MonoBehaviour
 {
     public List<GameObject> positions;
+    public AudioManager audioManager;
+    public AudioClip buttonClickNoise;
     public float xOffset;
     public int startingPos=0;
     public int currPosition = -1;
@@ -23,6 +25,7 @@ public class CursorInput : MonoBehaviour
                 startingPos--;
                 this.transform.position = positions[startingPos].transform.position;
                 this.transform.position -= new Vector3(xOffset, 0, 0);
+                audioManager.PlayClip(buttonClickNoise);
             }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -30,10 +33,12 @@ public class CursorInput : MonoBehaviour
                 startingPos++;
                 this.transform.position = positions[startingPos].transform.position;
                 this.transform.position -= new Vector3(xOffset, 0, 0);
+                audioManager.PlayClip(buttonClickNoise);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Return)) {
+        else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Z)) {
             currPosition = startingPos;
+            audioManager.PlayClip(buttonClickNoise);
         }
     }
 }

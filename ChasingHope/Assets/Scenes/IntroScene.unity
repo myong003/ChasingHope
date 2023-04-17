@@ -317,6 +317,7 @@ MonoBehaviour:
   footStepAudio: {fileID: 8300000, guid: 61f4a42aaf37ee4479dab49fdab817f5, type: 3}
   heartbeatSingle: {fileID: 8300000, guid: d050fa386d113484a967cd1ffa1b9f82, type: 3}
   heartbeatFlat: {fileID: 8300000, guid: 07ae503ce71019048b21e3a6b2153b2d, type: 3}
+  windNoise: {fileID: 8300000, guid: a7e9feb44913b4d4e9830071df5cd33b, type: 3}
   chasingHopePrompt: {fileID: 2101902607}
   cursor: {fileID: 1547412252}
   cutsceneTime: 3
@@ -953,6 +954,8 @@ MonoBehaviour:
   positions:
   - {fileID: 1999060299}
   - {fileID: 8817546}
+  audioManager: {fileID: 1207433363}
+  buttonClickNoise: {fileID: 8300000, guid: 713527364e19f93448ac060c55a4c0f9, type: 3}
   xOffset: 0.5
   startingPos: 0
   currPosition: -1

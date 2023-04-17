@@ -21,6 +21,7 @@ public class IntroCutscene : DialogueTrigger
     public AudioClip footStepAudio;
     public AudioClip heartbeatSingle;
     public AudioClip heartbeatFlat;
+    public AudioClip windNoise;
     public GameObject chasingHopePrompt;
     public CursorInput cursor;
     public float cutsceneTime;      // How long each cutscene is on screen before transitioning
@@ -64,12 +65,12 @@ public class IntroCutscene : DialogueTrigger
                     StartCoroutine(RabbitCutscene(rabbitCG3));
                 }
                 break;
-            case 5:
+            case 5: // Right before jumping
                 if (!inCutscene) {
                     StartCoroutine(RabbitCutscene(rabbitCG4));
                 }
                 break;
-            case 6:
+            case 6: // Jump check
                 if (!inCutscene) {
                     StartCoroutine(ChaseHopeScene());
                 }
@@ -79,8 +80,10 @@ public class IntroCutscene : DialogueTrigger
                     StartCoroutine(EndGameCutscene());
                 }
                 break;
-            case 8:
+            case 8: // Jump down
                 if (!inCutscene) {
+                    audioManager.ToggleLoop();
+                    audioManager.PlayClip(windNoise, 0.75f);
                     StartCoroutine(RabbitCutscene(CG7));
                 }
                 break;
@@ -123,13 +126,13 @@ public class IntroCutscene : DialogueTrigger
         audioManager.PlayClip(footStepAudio);
 
         yield return new WaitForSeconds(cutsceneTime);
-        CanvasManager.Instance.FadeToBlack(cutsceneFadeSpeed * Time.deltaTime);
+        // CanvasManager.Instance.FadeToBlack(cutsceneFadeSpeed * Time.deltaTime);
         audioManager.Stop();
 
         // Don't do anything while fading to black
-        while (CanvasManager.Instance.isFading) {
-            yield return null;
-        }
+        // while (CanvasManager.Instance.isFading) {
+        //     yield return null;
+        // }
 
         // Wait a little bit in black screen before transitioning to next phase
         yield return new WaitForSeconds(cutsceneTime / 5);
@@ -150,12 +153,12 @@ public class IntroCutscene : DialogueTrigger
 
         // Wait on rabbit scene before fading to black
         yield return new WaitForSeconds(cutsceneTime);
-        CanvasManager.Instance.FadeToBlack(cutsceneFadeSpeed * Time.deltaTime);
+        // CanvasManager.Instance.FadeToBlack(cutsceneFadeSpeed * Time.deltaTime);
 
         // Don't do anything while fading to black
-        while (CanvasManager.Instance.isFading) {
-            yield return null;
-        }
+        // while (CanvasManager.Instance.isFading) {
+        //     yield return null;
+        // }
 
         // Wait a little bit in black screen before transitioning to next phase
         yield return new WaitForSeconds(cutsceneTime / 5);
@@ -166,7 +169,15 @@ public class IntroCutscene : DialogueTrigger
 
     private IEnumerator ChaseHopeScene() {
         inCutscene = true;
+        CanvasManager.Instance.FadeToBlack(cutsceneFadeSpeed * Time.deltaTime);
+
+        // Don't do anything while fading to black
+        while (CanvasManager.Instance.isFading) {
+            yield return null;
+        }
+        
         CanvasManager.Instance.LoadCG(chasingHopeCG);
+
         CanvasManager.Instance.FadeIn(cutsceneFadeSpeed * Time.deltaTime);
 
         while (CanvasManager.Instance.isFading) {
