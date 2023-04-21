@@ -7,7 +7,10 @@ public class CanvasManager : MonoBehaviour
     public static CanvasManager Instance { get; private set; }
 
     public SpriteRenderer cg;
+    public DialogueTrigger dialogueTrigger;
     public bool isFading = false;
+    public bool fadesIn = false;
+    public float fadeInSpeed;
 
     void Awake() {
         if (Instance != null && Instance != this) {
@@ -15,6 +18,15 @@ public class CanvasManager : MonoBehaviour
         }
         else {
             Instance = this;
+        }
+    }
+
+    void Start() {
+        if (fadesIn) {
+            Color tempColor = cg.color;
+            tempColor.a = 1;
+            cg.color = tempColor;
+            FadeToBlack(fadeInSpeed * Time.deltaTime);
         }
     }
 
@@ -47,6 +59,9 @@ public class CanvasManager : MonoBehaviour
         }
 
         isFading = false;
+        if (fadesIn && dialogueTrigger != null) {
+            dialogueTrigger.TriggerDialogue();
+        }
     }
 
     public void FadeIn(float fadeSpeed) {

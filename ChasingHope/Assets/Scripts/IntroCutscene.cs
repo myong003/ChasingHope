@@ -82,13 +82,13 @@ public class IntroCutscene : DialogueTrigger
                 break;
             case 8: // Jump down
                 if (!inCutscene) {
-                    audioManager.ToggleLoop();
-                    audioManager.PlayClip(windNoise, 0.75f);
                     StartCoroutine(RabbitCutscene(CG7));
                 }
                 break;
             case 9:
                 if (!inCutscene) {
+                    audioManager.ToggleLoop();
+                    audioManager.PlayClip(windNoise, 0.75f);
                     StartCoroutine(RabbitCutscene(CG8));
                 }
                 break;
@@ -98,6 +98,11 @@ public class IntroCutscene : DialogueTrigger
                 }
                 break;
             case 11:
+                if (!inCutscene) {
+                    StartCoroutine(FadeToBlack());
+                }
+                break;
+            case 12:
                 SceneManager.LoadScene(1);
                 break;
             default:
@@ -237,5 +242,16 @@ public class IntroCutscene : DialogueTrigger
 
         phase = -1;
         inCutscene = false;
+    }
+
+    private IEnumerator FadeToBlack() {
+        inCutscene = true;
+        CanvasManager.Instance.FadeToBlack(cutsceneTime * Time.deltaTime);
+        while (CanvasManager.Instance.isFading) {
+            yield return null;
+        }
+
+        inCutscene = false;
+        phase++;
     }
 }

@@ -23158,7 +23158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4900000, guid: 1a7d4d2ea82ec0c42847e714313be135, type: 3}
-  triggerOnStart: 1
+  triggerOnStart: 0
 --- !u!4 &1438153179
 Transform:
   m_ObjectHideFlags: 0
@@ -24805,6 +24805,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 69213649331365831, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 69213649331365831, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 69213649331365831, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 69213649331365831, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 337726758928818882, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: fadesIn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 337726758928818882, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: fadeInSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 337726758928818882, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 1438153178}
+    - target: {fileID: 525476875609936511, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2714110886306837696, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
       propertyPath: m_Camera
       value: 
@@ -24896,6 +24928,38 @@ PrefabInstance:
     - target: {fileID: 2714110886306837711, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
       propertyPath: m_Name
       value: OverworldCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: ef5a0ee418f1fc94e9b760832d3d50bb, type: 3}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298610420021441078, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}

@@ -325,7 +325,7 @@ MonoBehaviour:
   pulseTime: 10
   startFrequency: 1
   slowAmount: 0.25
-  phase: 1
+  phase: 6
 --- !u!224 &93686097 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2714110886306837699, guid: 4c8cdd651b637c74792c2c576b1b771d, type: 3}
